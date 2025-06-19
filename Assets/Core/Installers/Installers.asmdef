@@ -1,0 +1,4 @@
+{
+	"name": "Installers",
+	"references":[ "ServiceLocator", "Core", "EventBus", "Networking", "BasicCheckeredBE", "UniTask" ]
+}

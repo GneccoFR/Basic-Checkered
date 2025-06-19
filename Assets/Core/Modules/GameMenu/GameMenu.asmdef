@@ -1,0 +1,20 @@
+{
+    "name": "GameMenu",
+    "rootNamespace": "",
+    "references": [
+        "Infrastructure",
+        "UseCases",
+        "UniTask",
+        "Shared",
+        "EventBus"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
