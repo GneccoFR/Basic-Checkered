@@ -1,0 +1,19 @@
+{
+    "name": "MoveIndicator",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b73876b6d855f164a93c6214c31694f2",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:4fe2f97f1b538dc4d8e5de699f8446e6",
+        "GUID:b7a37bcfab1cc954ab332e971ad74e1d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

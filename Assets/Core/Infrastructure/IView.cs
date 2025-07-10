@@ -1,9 +1,7 @@
-namespace Core.Modules.GameMenu.Scripts.Views
+namespace Core.Infrastructure
 {
     public interface IView
     {
         public void Initialize();
-
-        public void Destroy();
     }
 }

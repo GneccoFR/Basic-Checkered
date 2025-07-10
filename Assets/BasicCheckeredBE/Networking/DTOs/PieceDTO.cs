@@ -1,11 +1,13 @@
-namespace BasicCheckeredBE.Networking
+using BasicCheckeredBE.Core.Domain;
+
+namespace BasicCheckeredBE.Networking.DTOs
 {
     public struct PieceDTO
     {
         public GlobalFields.PieceType PieceType;
-        public GlobalFields.PlayerType Owner;
+        public Player Owner;
 
-        public PieceDTO(GlobalFields.PieceType pieceType, GlobalFields.PlayerType owner)
+        public PieceDTO(GlobalFields.PieceType pieceType, Player owner)
         {
             PieceType = pieceType;
             Owner = owner;

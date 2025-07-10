@@ -13,16 +13,4 @@ namespace Core.Shared
             Coordinates = coordinates;
         }
     }
-
-    public struct Piece
-    {
-        public PieceType PieceType;
-        public PlayerType Owner;
-        
-        public Piece(PieceType piece, PlayerType owner)
-        {
-            PieceType = piece;
-            Owner = owner;
-        }
-    }
 }

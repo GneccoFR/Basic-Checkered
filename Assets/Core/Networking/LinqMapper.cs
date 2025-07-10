@@ -40,12 +40,13 @@ namespace Core.Networking
         {
             return squaresDto.MapToList(squareDto =>
             {
-                var piece = new Piece((PieceType)squareDto.Piece.PieceType, (PlayerType)squareDto.Piece.Owner);
+                var player = new Player((PlayerType)squareDto.Piece.Owner.OwnerType, squareDto.Piece.Owner.PlayerId);
+                var piece = new Piece((PieceType)squareDto.Piece.PieceType, player);
                 return new BoardSquare(piece, new Vector2(squareDto.X, squareDto.Y));
             });
         }
         
-        public static GameBoard ToModel(this BoardDTO boardDto) => boardDto.MapTo(d =>
+        public static GameBoard ToModel(this BasicCheckeredBE.Networking.DTOs.BoardDTO boardDto) => boardDto.MapTo(d =>
         {
             var squares = d.Board;
             var boardSquares = new BoardSquare[squares.GetLength(0), squares.GetLength(1)];
@@ -54,13 +55,22 @@ namespace Core.Networking
                 for (int x = 0; x < squares.GetLength(0); x++)
                 {
                     var squareDto = squares[x, y];
-                    var piece = new Piece((PieceType)squareDto.Piece.PieceType, (PlayerType)squareDto.Piece.Owner);
+                    var player = new Player((PlayerType)squareDto.Piece.Owner.OwnerType, squareDto.Piece.Owner.PlayerId);
+                    var piece = new Piece((PieceType)squareDto.Piece.PieceType, player);
                     boardSquares[x, y] = new BoardSquare(piece, new Vector2(x, y));
                 }
             }
             return new GameBoard(boardSquares);
         });
             
+        public static Player MapToPlayerType(this BasicCheckeredBE.Core.Domain.Player player)
+        {
+            return new Player((PlayerType)player.OwnerType, player.PlayerId);
+        }
+        public static BasicCheckeredBE.Core.Domain.Player MapToPlayerBEType(this Player player)
+        {
+            return new BasicCheckeredBE.Core.Domain.Player((GlobalFields.PlayerType)player.OwnerType, player.PlayerId);
+        }
         
         //public static  
         

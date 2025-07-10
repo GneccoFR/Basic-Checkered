@@ -1,15 +1,17 @@
-using Core.Service_Locator;
 using UnityEngine;
 
-public class TestService : MonoBehaviour, IService  
+namespace Core.Service_Locator
 {
-    public void Register()
+    public class TestService : MonoBehaviour, IService  
     {
-        ServiceLocator.Instance.RegisterService(this);
-    }
+        public void Register()
+        {
+            ServiceLocator.Instance.RegisterService(this);
+        }
     
-    public void DoSomething() 
-    {
-        Debug.Log("Doing something in TestService");
+        public void DoSomething() 
+        {
+            Debug.Log("Doing something in TestService");
+        }
     }
 }

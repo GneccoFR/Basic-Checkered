@@ -1,5 +1,5 @@
 using System;
-using Core.Modules.GameMenu.Scripts.Views;
+using Core.Infrastructure;
 using Core.Modules.TitleScreen.Scripts.Presenters;
 using UnityEngine;
 

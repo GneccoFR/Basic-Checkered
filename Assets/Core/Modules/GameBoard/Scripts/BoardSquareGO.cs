@@ -1,11 +1,11 @@
-using System;
+using Core.EventBus;
+using Core.Service_Locator;
 using Core.Shared;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Core.Modules.GameBoard.Scripts.Presenters
+namespace Core.Modules.GameBoard.Scripts
 {
     public class BoardSquareGO : MonoBehaviour, IPointerEnterHandler
     {
@@ -16,6 +16,10 @@ namespace Core.Modules.GameBoard.Scripts.Presenters
         
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (ServiceLocator.Instance.GetService<LocalGameStateService>().CurrentPlayer.PlayerId != BoardSquare.Piece.Owner.PlayerId &&
+                BoardSquare.Piece.Owner.OwnerType != PlayerType.None)
+                return;
+            
             if (eventData.dragging)
             {
                 GameBoardManager.CurrentHoveredSquare = this;

@@ -1,11 +1,11 @@
+using System;
 using Core.EventBus;
-using Core.Modules.GameMenu.Scripts.Views;
 using Core.Service_Locator;
 using Core.UseCases;
 
 namespace Core.Infrastructure
 {
-    public abstract class BasePresenter
+    public abstract class BasePresenter : IDisposable
     {
     
         protected readonly IView View;

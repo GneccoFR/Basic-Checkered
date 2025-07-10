@@ -1,5 +1,6 @@
 using Core.EventBus;
 using Core.EventBus.GameEvents;
+using Core.Networking;
 using Core.Service_Locator;
 using Core.Shared;
 using Cysharp.Threading.Tasks;
@@ -24,15 +25,15 @@ namespace Core.UseCases
         {
             Debug.Log("NewGameUc Execute called!");
             
-            var newBoard = await _gateway.GetNewBoard() ;
+            var newGame = await _gateway.GetNewGame() ;
             
-            Debug.Log(newBoard);
+            Debug.Log(newGame);
             
-            GameBoard board =  Networking.LinqMapper.ToModel(newBoard);
+            GameBoard board =  Networking.LinqMapper.ToModel(newGame.Board);
             
             Debug.Log(board);
             
-            _eventBus.Publish(new NewGameEventResult(board));
+            _eventBus.Publish(new NewGameEventResult(board, newGame.MatchId, newGame.CurrentPlayer.MapToPlayerType(), newGame.OpponentPlayer.MapToPlayerType(), newGame.IsGameOver, newGame.WinnerPlayerId));
         }
     }
 }

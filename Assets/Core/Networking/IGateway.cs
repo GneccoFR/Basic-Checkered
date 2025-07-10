@@ -7,7 +7,7 @@ namespace Core.Networking
     public interface IGateway
     {
         UniTask Initialize();
-        UniTask<BoardDTO> GetNewBoard();
+        UniTask<NewGameDTO> GetNewGame();
         UniTask<AttemptToMoveDTO> AttemptToMove(PieceDTO piece, SquareDTO originalSquare, SquareDTO targetSquare);
     }
 }

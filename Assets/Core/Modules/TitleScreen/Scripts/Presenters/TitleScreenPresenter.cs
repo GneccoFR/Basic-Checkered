@@ -1,6 +1,5 @@
 using Core.EventBus.GameEvents;
 using Core.Infrastructure;
-using Core.Modules.GameMenu.Scripts.Views;
 using Core.Modules.TitleScreen.Scripts.Views;
 
 namespace Core.Modules.TitleScreen.Scripts.Presenters

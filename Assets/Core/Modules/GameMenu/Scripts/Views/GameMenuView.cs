@@ -1,3 +1,4 @@
+using Core.Infrastructure;
 using Core.Modules.GameMenu.Scripts.Presenters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +15,7 @@ namespace Core.Modules.GameMenu.Scripts.Views
         {
             Initialize();
         }
-
-        private void OnDestroy()
-        {
-            Destroy();
-        }
-
+        
         public void Initialize()
         {
             _presenter = new GameMenuPresenter(this);
@@ -32,10 +28,10 @@ namespace Core.Modules.GameMenu.Scripts.Views
             Debug.Log("Button Clicked!");
             _presenter.StartClicked();
         }
-
-        public void Destroy()
+        
+        private void OnDestroy()
         {
-            _presenter.Dispose();
+            startButton.onClick.RemoveAllListeners();
         }
     }
 }

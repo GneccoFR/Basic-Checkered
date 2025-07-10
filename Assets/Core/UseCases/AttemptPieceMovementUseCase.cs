@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BasicCheckeredBE.Networking;
+using BasicCheckeredBE.Networking.DTOs;
 using Core.EventBus;
 using Core.EventBus.GameEvents;
 using Core.Networking;
@@ -33,20 +34,21 @@ namespace Core.UseCases
             Debug.Log("AttemptPieceMovementUseCase Execute called!");
             Debug.Log($"Original square Piece: {_originalSquare.Piece.PieceType}, Owner: {_originalSquare.Piece.Owner}");
             Debug.Log($"Target square Piece: {_targetSquare.Piece.PieceType}, Owner: {_targetSquare.Piece.Owner}");
+
+            var movingPlayer = _originalSquare.Piece.Owner.MapToPlayerBEType();
+            var targetSquarePlayer = _targetSquare.Piece.Owner.MapToPlayerBEType();
+            var originalPieceDto = new PieceDTO((GlobalFields.PieceType)_pieceToMove.PieceType, movingPlayer);
+            var targetPieceDto = new PieceDTO((GlobalFields.PieceType)_targetSquare.Piece.PieceType, targetSquarePlayer);
+            var originalSquareDto = new SquareDTO(originalPieceDto, (int)_originalSquare.Coordinates.x, (int)_originalSquare.Coordinates.y);
+            var targetSquareDto = new SquareDTO(targetPieceDto, (int)_targetSquare.Coordinates.x, (int)_targetSquare.Coordinates.y);
             
-            
-            var originalPieceDto = new PieceDTO((GlobalFields.PieceType)_pieceToMove.PieceType, (GlobalFields.PlayerType)_pieceToMove.Owner);
-            var targetPieceDto = new PieceDTO((GlobalFields.PieceType)_targetSquare.Piece.PieceType, (GlobalFields.PlayerType)_targetSquare.Piece.Owner);
-            var originalSquareDto = new BasicCheckeredBE.Networking.DTOs.SquareDTO(originalPieceDto, (int)_originalSquare.Coordinates.x, (int)_originalSquare.Coordinates.y);
-            var targetSquareDto = new BasicCheckeredBE.Networking.DTOs.SquareDTO(targetPieceDto, (int)_targetSquare.Coordinates.x, (int)_targetSquare.Coordinates.y);
-            
-            var attemptToMove = await _gateway.AttemptToMove(originalPieceDto, originalSquareDto, targetSquareDto);
+            var attemptToMove = await _gateway.AttemptToMove(originalSquareDto, targetSquareDto);
             
             if (attemptToMove.Success)
             {
                 // If the move was successful, we publish an event with the updated board squares
                 List<BoardSquare> updatedBoardSquares = LinqMapper.MapToList(attemptToMove.UpdatedBoardSquares);
-                _eventBus.Publish(new AttemptPieceMovementEventResult(updatedBoardSquares));
+                _eventBus.Publish(new AttemptPieceMovementEventResult(updatedBoardSquares, attemptToMove.CurrentPlayer.MapToPlayerType(), attemptToMove.OpponentPlayer.MapToPlayerType()));
             }
             else
             {

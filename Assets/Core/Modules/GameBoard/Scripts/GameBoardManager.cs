@@ -3,8 +3,9 @@ using Core.EventBus.GameEvents;
 using Core.Service_Locator;
 using Core.Shared;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Core.Modules.GameBoard.Scripts.Presenters
+namespace Core.Modules.GameBoard.Scripts
 {
     public class GameBoardManager : MonoBehaviour
     {
@@ -13,6 +14,11 @@ namespace Core.Modules.GameBoard.Scripts.Presenters
         [SerializeField] private BoardSquareGO boardSquarePrefab;
         [SerializeField] private RectTransform boardContainer;
         [SerializeField] private RectTransform boardBackground;
+        [SerializeField] private RectTransform floatingPiece;
+        [SerializeField] private Image floatingPieceImage;
+        public static RectTransform FloatingPiece;
+        public static Image FloatingPieceImage;
+        
         private BoardSquareGO[,] _boardGO;
         private IEventBus _eventBus;
         
@@ -26,6 +32,8 @@ namespace Core.Modules.GameBoard.Scripts.Presenters
         {
             _eventBus = ServiceLocator.Instance.GetService<IEventBus>();
             SubscribeEvents();
+            FloatingPiece = floatingPiece;
+            FloatingPieceImage = floatingPieceImage;
         }
 
         private void SubscribeEvents()

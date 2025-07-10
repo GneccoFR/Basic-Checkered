@@ -1,6 +1,4 @@
-using BasicCheckeredBE.Networking.DTOs;
-
-namespace BasicCheckeredBE.Networking
+namespace BasicCheckeredBE.Networking.DTOs
 {
     public struct BoardDTO
     {

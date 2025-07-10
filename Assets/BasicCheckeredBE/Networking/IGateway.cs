@@ -6,7 +6,7 @@ namespace BasicCheckeredBE.Networking
     public interface IGateway
     {
         UniTask Initialize();
-        UniTask<BoardDTO> GetNewBoard();
-        UniTask<AttemptToMoveDTO> AttemptToMove(PieceDTO piece, SquareDTO originalSquare, SquareDTO targetSquare);
+        UniTask<NewGameDTO> GetNewGame();
+        UniTask<AttemptToMoveDTO> AttemptToMove(SquareDTO originalSquare, SquareDTO targetSquare);
     }
 }

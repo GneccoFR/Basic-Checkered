@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Core.Networking.DTOs;
-using Core.Service_Locator;
 using Core.Shared;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Core.Networking
             return UniTask.CompletedTask;
         }
 
-        public async UniTask<BoardDTO> GetNewBoard()
+        public async UniTask<NewGameDTO> GetNewGame()
         {
             Debug.Log("Gateway Reached!");
 
@@ -47,7 +47,14 @@ namespace Core.Networking
                 }
             }
 
-            return new BoardDTO(board);
+            return new NewGameDTO(
+                Guid.NewGuid(), 
+                new Player(PlayerType.Player1, Guid.NewGuid()),
+                new Player(PlayerType.Player2, Guid.NewGuid()),
+                false, // IsGameOver
+                null, // WinnerPlayerId
+                new BoardDTO(board)
+            );
         }
 
         public async UniTask<AttemptToMoveDTO> AttemptToMove(PieceDTO piece, SquareDTO originalSquare, SquareDTO targetSquare)
